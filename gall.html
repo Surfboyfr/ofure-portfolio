@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+<style>
+    *{
+        box-sizing: border-box;
+
+    }
+    #wrap{
+        width: 100%;
+    } 
+
+   .hamburger{
+      display: none;
+   }
+
+   .image-container img{
+    width: 300px;
+}
+.closeside{
+    display: none;
+}
+
+   aside{
+   width: 19%;
+   top: 0;
+   padding: 0  .5rem;
+   position: fixed;
+   background-color: #f4f4f4;
+   border-radius: 10px;
+   left: 10px;
+   height: 100vh;
+   margin: .5rem;
+}
+
+aside h1{
+   font-size: 45px;
+   font-family: cursive;
+   /* text-align: center; */
+   margin: 2rem 0rem 4rem;
+}
+
+aside ul li{
+   list-style-type: none;
+   margin-bottom: 3rem;
+}
+
+aside ul li a{
+   text-decoration: none;
+   color: black;
+   font-family: cursive;
+}
+
+aside ul li a::after {
+   content: '';
+   position: absolute;
+   left: 40px;
+   width: 0%;
+   height: 3px;
+   background-color: #000000;
+   transition: width 0.3s ease; 
+   margin-top: 25px;
+}
+aside ul li a:hover::after {
+   width: 35%;
+}
+   #image-modal{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      bottom: 0;
+   }
+
+#imageModal{
+   display: none;
+}
+
+.con-flex {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+gap: 20px;
+padding: 20px;
+}
+
+section.wraps{
+  width:79%;
+  padding: 1rem;
+  height: 100%;
+  margin-left: 19%;
+  margin-top: -60px;
+}
+.con h1{
+    font-family: sans-serif;
+    font-size: 3.5rem;
+    text-align: center;
+}
+.con h1 span{
+    font-family: sans-serif;
+    font-size: 1rem;
+}
+.con1{
+    text-align: center;
+    font-size: 2rem;
+    font-family: sans-serif;
+    color: #616161;
+    padding: 0 4rem;
+}
+    .image-container {
+        flex: 1 1 calc(33.333% - 20px);
+        box-sizing: border-box;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 55vh;
+        transition: transform 0.3s ease;
+    }
+
+    .image-container img:hover {
+        transform: scale(1.1); /* Zoom in effect on hover*/
+    }
+
+
+    .modal {
+        display: none;  /* Hidden by default */
+        position: fixed;
+        z-index: 1000;
+        padding-top: 60px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        overflow: auto;
+        box-sizing: border-box;
+    }
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        max-width: 80%;
+        max-height: 80%;
+    }
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        color: white;
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        color: white;
+        font-size: 30px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 16px;
+        transition: 0.3s ease;
+    }
+
+    .prev {
+        left: 0;
+        transform: translateY(-50%);
+    }
+
+    .next {
+        right: 0;
+        transform: translateY(-50%);
+    }
+
+    .prev:hover, .next:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    } 
+
+    /* Media query for smaller screens */
+    @media (max-width: 768px) {
+        aside{
+            display: none;
+        }
+        #wraps{
+            width: 100%;
+        }
+        .hamburger{
+            display: block;
+        }
+        .image-container {
+            flex: 1 1 calc(50% - 20px); /* 2 images per row */
+            width: 100%;
+        }
+        .hamburger {
+      display: block;
+      width: 30px;
+      cursor: pointer;
+      margin: 20px;
+      top: 20px;
+      right: 20px;
+      /* border: 1px solid red; */
+      z-index: 99;
+    }
+    
+    .bar {
+      height: 3px;
+      width: 100%;
+      background-color: #333;
+      margin: 5px 0;
+      transition: 0.4s;
+    }
+    }
+
+    @media (max-width: 480px) {
+
+        .image-container {
+            flex: 1 1 100%; /* 1 image per row */
+        }
+
+        section.wraps {
+        width: 100%;
+        padding: 1rem;
+        height: 100%;
+        margin: 0rem 0rem;
+        }
+        #wrap{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .con{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* position: relative;
+            left: 10px; */
+        }
+        .con1 {
+        text-align: center;
+        width: 100%;
+        font-size: 2rem;
+        font-family: sans-serif;
+        color: #616161;
+}
+
+/* new */
+.sidebar{
+      position: fixed;
+      top: 0;
+      left: -250px; /* hide sidebar */
+      width: 250px;
+      height: 100%;
+      background-color: #333;
+      color: white;
+      transition:left 0.3s ease;
+      padding-top: 60px;
+      z-index: 100;      
+   }
+   .sidebar.active{
+      left: 0;
+   }
+   .sidebar ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      margin-top: 2rem;
+    }
+    .sidebar ul li{
+      padding: 15px 20px;
+    }
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+    }
+    .aside{
+    /* height: 70px; */
+    display: block; 
+    }
+    
+    .sidebar ul li a:hover {
+      background-color: #444;
+    }
+    .sidebar ul li a:hover::after {
+      width: 0%;
+   }
+
+.closeside{
+      position: fixed;
+      right: 20px;
+      top: 10px;
+      z-index: 999;
+      display: none;
+      width: 50px;
+      height: 50px;
+      
+   }
+   .closeside img{
+      z-index: 1999;
+   }
+
+   .hamburger {
+      display: block;
+      width: 30px;
+      cursor: pointer;
+      margin: 20px;
+      top: 20px;
+      right: 20px;
+      /* border: 1px solid red; */
+      z-index: 99;
+    }
+    
+    .bar {
+      height: 3px;
+      width: 100%;
+      background-color: #333;
+      margin: 5px 0;
+      transition: 0.4s;
+    }
+    }
+   
+</style>
+<body>
+    <div id="wrap">
+        <aside>
+            <div class="nav">
+            <h1>OFURE.</h1>
+            <div class="closeside"><img src="./img/reject.png" alt="" width="45px"></div>
+            <div class="sidebar " id="sidebar">
+
+                <ul>             
+                <li><a  href="index.html">HOME</a></li>
+                <li><a  href="index.html">ABOUT</a></li>
+                <li><a href="index.html">ART</a></li>
+                <li><a href="index.html">GALLERY</a></li>
+                <li><a href="index.html">CONTACT</a></li>
+            </ul>
+            </div>
+        </div>
+        </aside>
+        <section class="wraps">
+        <div class="parent">
+            <div class="hamburger" id="klick" >
+               <div class="bar"></div>
+               <div class="bar"></div>
+               <div class="bar"></div>
+             </div>
+            </div>
+        <div class="con">
+            <div class="con1">
+            <h1> <span>Recent posts</span> <br> Gallery</h1>
+            <p>Explore My latest collection of images showcasing diverse themes and moments. Each piece tells a unique story, capturing the essence of creativity and expression. Dive in and experience the visual journey.</p>
+        </div>
+            <div class="con-flex">
+                <div class="image-container" onclick="openModal(0)">
+                    <img src="./img/IMG-20250404-WA0001.jpg" alt="Image 1">
+                </div>
+                <div class="image-container" onclick="openModal(1)">
+                    <img src="./img/IMG-20250404-WA0002.jpg" alt="Image 2">
+                </div>
+                <div class="image-container" onclick="openModal(2)">
+                    <img src="img/IMG-20250404-WA0015.jpg" alt="Image 3">
+                </div>
+                <div class="image-container" onclick="openModal(3)">
+                    <img src="./img/IMG-20250404-WA0019.jpg" alt="Image 4">
+                </div>
+                <div class="image-container" onclick="openModal(4)">
+                    <img src="./img/IMG-20250404-WA0018.jpg" alt="Image 5">
+                </div>
+                <div class="image-container" onclick="openModal(5)">
+                    <img src="./img/IMG-20250404-WA0016.jpg" alt="Image 6">
+                </div>
+                <div class="image-container" onclick="openModal(6)">
+                    <img src="./img/IMG-20250404-WA0006.jpg" alt="Image 7">
+                </div>
+                <div class="image-container" onclick="openModal(7)">
+                    <img src="./img/IMG-20250404-WA0013.jpg" alt="Image 8">
+                </div>
+                <div class="image-container" onclick="openModal(8)">
+                    <img src="./img/IMG-20250404-WA0007.jpg" alt="Image 9">
+                </div>
+            
+        </div>
+                <!-- <div class="image-container">
+                    <img src="https://via.placeholder.com/300" alt="Image 10">
+                </div>
+                <div class="image-container">
+                    <img src="https://via.placeholder.com/300" alt="Image 11">
+                </div>
+                <div class="image-container">
+                    <img src="https://via.placeholder.com/300" alt="Image 12">
+                </div> -->
+            </div>
+    </section>
+    </div>
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg">
+        <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+        <a class="next" onclick="changeImage(1)">&#10095;</a>
+    </div>
+<script>
+     var images = document.querySelectorAll('.image-container img');
+    var modal = document.getElementById('myModal');
+    var modalImg = document.getElementById('modalImg');
+    var currentImageIndex = 0;
+
+    function openModal(index) {
+        currentImageIndex = index;
+        modal.style.display = "block";
+        modalImg.src = images[index].src;
+    }
+
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    function changeImage(direction) {
+        currentImageIndex += direction;
+
+        if (currentImageIndex >= images.length) {
+            currentImageIndex = 0;
+        } else if (currentImageIndex < 0) {
+            currentImageIndex = images.length - 1;
+        }
+
+        modalImg.src = images[currentImageIndex].src;
+    }
+
+    const openSideBar = (e)=>{
+   document.querySelector(".parent").addEventListener('click', ()=>{
+      const sidebar = document.querySelector('.sidebar')
+      const closeBtn = document.querySelector('.closeside');
+
+      sidebar.style.display = 'block'
+      sidebar.classList.add('active');
+      closeBtn.style.display = 'block';
+      console.log('clicked');
+
+     
+      closeBtn.addEventListener('click', ()=>{
+         sidebar.classList.remove('active');
+         console.log('clicked it')
+         // sidebar.style.display = 'none';
+         closeBtn.style.display='none';
+      })
+
+    })
+
+}
+openSideBar();
+    // document.querySelector('.parent').addEventListener('click', )
+</script>    
+<script src="/script.js"></script>
+</body>
+</html>
